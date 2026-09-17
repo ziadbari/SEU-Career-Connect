@@ -1,0 +1,227 @@
+/* ==========================================
+   SEU Career Connect - Elite HackerOne Theme CSS
+   ================================---------- */
+
+:root {
+    --bg-deep: #000000;
+    --bg-card: rgba(18, 26, 41, 0.75);
+    --bg-card-hover: rgba(26, 38, 59, 0.85);
+    --neon-blue: #0066ff;
+    --neon-glow: rgba(0, 102, 255, 0.35);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --success-green: #10b981;
+    --error-red: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Container Utility */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==========================================
+   Navigation Bar (Header)
+   ================================---------- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-glass);
+    z-index: 1000;
+    padding: 14px 0;
+}
+
+.flex-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.varsity-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-glow);
+}
+
+.logo-text h2 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.logo-text h2 span {
+    color: var(--neon-blue);
+}
+
+.logo-text small {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+    color: var(--text-main);
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-glass);
+    color: var(--text-main);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.btn-primary {
+    background: var(--neon-blue);
+    border: none;
+    color: var(--text-main);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #0052cc;
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* ==========================================
+   Glassmorphism Cards & Panels
+   ================================---------- */
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 12px;
+    padding: 24px;
+    transition: 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(0, 102, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    background: rgba(10, 15, 25, 0.9);
+    border: 1px solid var(--border-glass);
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 12px var(--neon-glow);
+}
+
+/* Footer Section */
+footer {
+    background: rgba(5, 8, 15, 0.95);
+    border-top: 1px solid var(--border-glass);
+    padding: 40px 0 20px 0;
+    margin-top: 80px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+    .nav-links {
+        display: none; /* Mobile menu can be toggled via JS */
+    }
+}
