@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEU Career Connect - Alumni Events & Bookings</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #030712;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .matrix-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .cyber-card {
+            background: rgba(13, 27, 42, 0.7);
+            border: 1px solid #00ff66;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .cyber-button {
+            background: #00ff66;
+            color: #030712;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .cyber-button:hover {
+            background: #00b347;
+            box-shadow: 0 0 15px #00ff66;
+        }
+    </style>
+</head>
+<body class="matrix-bg min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar -->
+    <nav class="cyber-card p-4 border-b border-[#00ff66] flex justify-between items-center px-8">
+        <div class="text-xl font-bold tracking-widest text-[#00ff66]">SEU // ALUMNI-EVENTS</div>
+        <div class="space-x-6">
+            <a href="index.html" class="hover:text-white transition">Home</a>
+            <a href="dashboard.html" class="hover:text-white transition">Dashboard</a>
+            <a href="alumni-event.html" class="text-white underline">Events</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto p-6 my-8 w-full">
+        <h1 class="text-3xl font-bold mb-6 text-center tracking-wider text-white">⚡ Upcoming Alumni Networking & Tech Events</h1>
+        <p class="text-center text-gray-400 mb-10">Register, book your slot, and secure your seat via bKash payment simulation.</p>
+
+        <!-- Events Grid -->
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <!-- Event Card 1 -->
+            <div class="cyber-card p-6 rounded-lg flex flex-col justify-between">
+                <div>
+                    <span class="text-xs bg-[#00ff66]/20 text-[#00ff66] px-2 py-1 rounded border border-[#00ff66]">Tech Meetup</span>
+                    <h2 class="text-2xl font-bold text-white mt-3">Cybersecurity & Ethical Hacking Summit 2026</h2>
+                    <p class="text-gray-300 mt-2 text-sm">Connect with industry-leading SEU alumni working in top cybersecurity firms. Learn modern threat vectors and defense mechanisms.</p>
+                    <div class="mt-4 text-sm space-y-1 text-gray-400">
+                        <p>📅 Date: 25th March, 2026</p>
+                        <p>📍 Venue: SEU Auditorium & Online</p>
+                        <p class="text-[#00ff66] font-bold">💳 Registration Fee: ৳500 BDT</p>
+                    </div>
+                </div>
+                <button onclick="openBookingModal('Cybersecurity & Ethical Hacking Summit 2026', 500)" class="mt-6 cyber-button py-2 px-4 rounded w-full">
+                    Book Event Slot & Pay
+                </button>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="cyber-card p-6 rounded-lg flex flex-col justify-between">
+                <div>
+                    <span class="text-xs bg-[#00ff66]/20 text-[#00ff66] px-2 py-1 rounded border border-[#00ff66]">Career Growth</span>
+                    <h2 class="text-2xl font-bold text-white mt-3">SEU Alumni Annual Tech Gala & Dinner</h2>
+                    <p class="text-gray-300 mt-2 text-sm">Network with successful alumni entrepreneurs, software architects, and tech leaders over dinner and panel discussions.</p>
+                    <div class="mt-4 text-sm space-y-1 text-gray-400">
+                        <p>📅 Date: 10th April, 2026</p>
+                        <p>📍 Venue: Radisson Blu Dhaka</p>
+                        <p class="text-[#00ff66] font-bold">💳 Registration Fee: ৳1000 BDT</p>
+                    </div>
+                </div>
+                <button onclick="openBookingModal('SEU Alumni Annual Tech Gala & Dinner', 1000)" class="mt-6 cyber-button py-2 px-4 rounded w-full">
+                    Book Event Slot & Pay
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- bKash Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4">
+        <div class="cyber-card max-w-md w-full p-6 rounded-lg relative">
+            <button onclick="closeBookingModal()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-xl">✕</button>
+            <h2 id="modalEventTitle" class="text-xl font-bold text-white mb-2">Event Registration</h2>
+            <p class="text-sm text-gray-300 mb-4">Complete your bKash payment to confirm your seat.</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Your Full Name</label>
+                    <input type="text" id="userName" class="w-full bg-black border border-[#00ff66] p-2 rounded text-white text-sm" placeholder="e.g. Tanvir Ahmed">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">SEU Student ID / Alumni ID</label>
+                    <input type="text" id="userId" class="w-full bg-black border border-[#00ff66] p-2 rounded text-white text-sm" placeholder="e.g. 2021-1-60-000">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">bKash Account Number (Sender)</label>
+                    <input type="text" id="bkashNumber" class="w-full bg-black border border-[#00ff66] p-2 rounded text-white text-sm" placeholder="017XXXXXXXX">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Transaction ID (TrxID)</label>
+                    <input type="text" id="trxId" class="w-full bg-black border border-[#00ff66] p-2 rounded text-white text-sm" placeholder="e.g. 9G8H7F6E5D">
+                </div>
+                <div class="text-sm text-[#00ff66] bg-black/40 p-2 rounded border border-[#00ff66]/30">
+                    Send money to Merchant/Personal bKash: <strong class="text-white">01700000000</strong>
+                </div>
+                <button onclick="submitBooking()" class="cyber-button w-full py-2 rounded font-bold">Confirm & Submit Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-[#00ff66] text-[#030712] font-bold px-6 py-3 rounded shadow-lg hidden">
+        🎉 Event Ticket Booked & Payment Verified Successfully!
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 border-t border-[#00ff66]/30 text-xs text-gray-500">
+        &copy; 2026 Southeast University (SEU) Career Connect. All rights reserved.
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let selectedEvent = "";
+        let eventFee = 0;
+
+        function openBookingModal(eventTitle, fee) {
+            selectedEvent = eventTitle;
+            eventFee = fee;
+            document.getElementById('modalEventTitle').innerText = `Register: ${eventTitle} (Fee: ৳${fee})`;
+            document.getElementById('bookingModal').classList.remove('hidden');
+            document.getElementById('bookingModal').classList.add('flex');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('flex');
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        function submitBooking() {
+            const name = document.getElementById('userName').value.trim();
+            const id = document.getElementById('userId').value.trim();
+            const bkash = document.getElementById('bkashNumber').value.trim();
+            const trx = document.getElementById('trxId').value.trim();
+
+            if (!name || !id || !bkash || !trx) {
+                alert("Please fill in all the details including bKash TrxID!");
+                return;
+            }
+
+            // Save booking locally so dashboard can track it
+            const bookingData = {
+                event: selectedEvent,
+                name: name,
+                studentId: id,
+                bkashNo: bkash,
+                trxId: trx,
+                fee: eventFee,
+                date: new Date().toLocaleDateString()
+            };
+
+            let existingBookings = JSON.parse(localStorage.getItem('seu_event_bookings')) || [];
+            existingBookings.push(bookingData);
+            localStorage.setItem('seu_event_bookings', JSON.stringify(existingBookings));
+
+            closeBookingModal();
+            
+            // Show Success Toast
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+
+            // Clear inputs
+            document.getElementById('userName').value = '';
+            document.getElementById('userId').value = '';
+            document.getElementById('bkashNumber').value = '';
+            document.getElementById('trxId').value = '';
+        }
+    </script>
+</body>
+</html>

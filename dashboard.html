@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | SEU Career Connect</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(10, 20, 35, 0.85);
+            --neon-blue: #0066ff;
+            --neon-glow: rgba(0, 102, 255, 0.35);
+            --neon-green: #00ff66;
+            --border-glass: rgba(0, 102, 255, 0.25);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Deep Cyber Blue Matrix Simulation Canvas */
+        #cyberCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .flex-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .varsity-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--neon-blue);
+        }
+
+        .logo-text h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text h2 span {
+            color: var(--neon-blue);
+        }
+
+        .logo-text small {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 130px 0 60px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(16px);
+            padding: 25px 30px;
+            border-radius: 16px;
+        }
+
+        .user-profile-info h1 {
+            font-size: 1.8rem;
+            margin: 0 0 5px 0;
+        }
+
+        .user-profile-info p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .user-badge {
+            background: rgba(0, 102, 255, 0.15);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* Dashboard Grid System */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .dash-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(16px);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+        }
+
+        .dash-card h3 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 12px;
+        }
+
+        .dash-card h3 i {
+            color: var(--neon-blue);
+        }
+
+        /* Stats Mini Boxes */
+        .stat-mini-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-box h4 {
+            font-size: 1.8rem;
+            margin: 0 0 5px 0;
+            color: var(--neon-blue);
+        }
+
+        .stat-box span {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Alumni Session Booking List */
+        .alumni-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .alumni-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 15px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .alumni-item:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .alumni-info h4 {
+            margin: 0 0 3px 0;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .alumni-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .btn-book {
+            background: rgba(0, 102, 255, 0.2);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-book:hover {
+            background: var(--neon-blue);
+            color: #fff;
+            box-shadow: 0 0 12px var(--neon-blue);
+        }
+
+        /* Modal Popup for Booking Success */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #0a1423;
+            border: 1px solid var(--neon-green);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.3);
+        }
+
+        .modal-content h3 {
+            color: var(--neon-green);
+            margin-top: 0;
+        }
+
+        .btn-close-modal {
+            background: var(--neon-green);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cyber Security Matrix Simulation Canvas -->
+    <canvas id="cyberCanvas"></canvas>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container flex-nav">
+            <a href="index.html" class="logo-container">
+                <img src="images/download.jpg" alt="SEU Logo" class="varsity-logo">
+                <div class="logo-text">
+                    <h2>SOUTHEAST <span>UNIVERSITY</span></h2>
+                    <small>Career Connect Portal</small>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="jobs.html">Find Jobs</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="alumni event.html">Events</a></li>
+                    <li><a href="mentorship.html">Mentorship</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        
+        <!-- Dashboard Top Greeting Banner -->
+        <div class="dashboard-header">
+            <div class="user-profile-info">
+                <h1>Welcome Back, Tanvir Ahmed</h1>
+                <p>Southeast University | Department of Computer Science & Engineering (CSE)</p>
+            </div>
+            <div class="user-badge">
+                <i class="fa-solid fa-graduation-cap"></i> SEU Student ID: 202301105
+            </div>
+        </div>
+
+        <!-- Dashboard Grid Layout -->
+        <div class="dashboard-grid">
+            
+            <!-- Quick Stats Card -->
+            <div class="dash-card">
+                <h3><i class="fa-solid fa-chart-pie"></i> Activity Overview</h3>
+                <div class="stat-mini-container">
+                    <div class="stat-box">
+                        <h4>04</h4>
+                        <span>Applied Jobs</span>
+                    </div>
+                    <div class="stat-box">
+                        <h4>02</h4>
+                        <span>Interviews</span>
+                    </div>
+                    <div class="stat-box">
+                        <h4>03</h4>
+                        <span>Sessions Booked</span>
+                    </div>
+                    <div class="stat-box">
+                        <h4>85%</h4>
+                        <span>Profile Score</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Session with Alumni Card -->
+            <div class="dash-card">
+                <h3><i class="fa-solid fa-user-tie"></i> Book Session with Alumni</h3>
+                <div class="alumni-list">
+                    <div class="alumni-item">
+                        <div class="alumni-info">
+                            <h4>Md. Rakibul Islam</h4>
+                            <p>Software Engineer @ Google (SEU Alumni)</p>
+                        </div>
+                        <button class="btn-book" onclick="bookSession('Md. Rakibul Islam - Google')">Book Slot</button>
+                    </div>
+
+                    <div class="alumni-item">
+                        <div class="alumni-info">
+                            <h4>Tasnia Tabassum</h4>
+                            <p>Cyber Security Specialist @ Enviz (SEU Alumni)</p>
+                        </div>
+                        <button class="btn-book" onclick="bookSession('Tasnia Tabassum - Cyber Security')">Book Slot</button>
+                    </div>
+
+                    <div class="alumni-item">
+                        <div class="alumni-info">
+                            <h4>Shahriar Ahmed</h4>
+                            <p>Cloud Architect @ Selise Digital (SEU Alumni)</p>
+                        </div>
+                        <button class="btn-book" onclick="bookSession('Shahriar Ahmed - Cloud Architect')">Book Slot</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Success Modal Popup -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: var(--neon-green); margin-bottom: 10px;"></i>
+            <h3>Session Booked Successfully!</h3>
+            <p id="modalText" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Your mentorship slot has been confirmed. The alumni will connect via email shortly.</p>
+            <button class="btn-close-modal" onclick="closeModal()">Got It</button>
+        </div>
+    </div>
+
+    <!-- Deep Blue Cyber Security Matrix Rain Simulation Script -->
+    <script>
+        const canvas = document.getElementById('cyberCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const characters = '01ABCDEF010101XYZ#$@<>*&[]';
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0066ff';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        // Booking Modal Interaction
+        function bookSession(mentorName) {
+            document.getElementById('modalText').innerText = `Your mentorship session slot with ${mentorName} has been successfully requested.`;
+            document.getElementById('successModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

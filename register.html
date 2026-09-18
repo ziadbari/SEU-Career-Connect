@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | SEU Career Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(18, 26, 41, 0.75);
+            --neon-blue: #0066ff;
+            --neon-glow: rgba(0, 102, 255, 0.3);
+            --neon-green: #00ff66;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+        body { background-color: var(--bg-deep); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-glass); z-index: 1000; padding: 15px 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .flex-nav { display: flex; align-items: center; justify-content: space-between; }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .varsity-logo { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; border: 1px solid var(--neon-blue); }
+        .logo-text h2 { font-size: 1.1rem; font-weight: 800; color: #fff; margin: 0; }
+        .logo-text h2 span { color: var(--neon-blue); }
+        .logo-text small { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+        .nav-links { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px var(--neon-blue); }
+        
+        .auth-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 20px 40px 20px; }
+        .auth-card { background: var(--bg-card); border: 1px solid var(--border-glass); backdrop-filter: blur(16px); padding: 40px; border-radius: 16px; width: 100%; max-width: 500px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+        .auth-card h2 { text-align: center; font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); padding: 12px 15px; border-radius: 8px; color: #fff; font-size: 0.95rem; outline: none; box-sizing: border-box; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px var(--neon-glow); }
+        
+        /* Success Big Alert Box */
+        .success-alert {
+            display: none;
+            background: rgba(0, 255, 102, 0.15);
+            border: 2px solid var(--neon-green);
+            color: #00ff66;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+        }
+        .success-alert i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .success-alert h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            letter-spacing: 0.5px;
+        }
+        .success-alert p {
+            font-size: 0.9rem;
+            color: #a3ffc2;
+            margin: 0;
+        }
+
+        .btn-submit { width: 100%; background: var(--neon-blue); border: none; color: #fff; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #0052cc; box-shadow: 0 0 15px var(--neon-blue); }
+        .auth-footer { text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--text-muted); }
+        .auth-footer a { color: var(--neon-blue); text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container flex-nav">
+            <a href="index.html" class="logo-container">
+                <img src="images/download.jpg" alt="SEU Logo" class="varsity-logo">
+                <div class="logo-text">
+                    <h2>SOUTHEAST <span>UNIVERSITY</span></h2>
+                    <small>Career Connect Portal</small>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="jobs.html">Find Jobs</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                    <li><a href="mentorship.html">Mentorship</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="student-dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="auth-section">
+        <div class="auth-card">
+            <h2>Create SEU Account</h2>
+            
+            <!-- বড় সবুজ সাকসেস অ্যালার্ট বক্স -->
+            <div id="successAlert" class="success-alert">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>REGISTRATION SUCCESSFUL!</h3>
+                <p>Your account has been created. Redirecting to login...</p>
+            </div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regName" placeholder="e.g. Tanvir Ahmed" required>
+                </div>
+                <div class="form-group">
+                    <label>Student ID / Email</label>
+                    <input type="text" id="regId" placeholder="e.g. 2023001 or name@seu.edu.bd" required>
+                </div>
+                <div class="form-group">
+                    <label>I am a</label>
+                    <select id="regRole" style="color: #94a3b8;">
+                        <option value="student">Current Student</option>
+                        <option value="alumni">Alumnus / Alumna</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPass" placeholder="Create a strong password" required>
+                </div>
+                <button type="submit" class="btn-submit">Register Account</button>
+            </form>
+
+            <div class="auth-footer" id="authFooterText">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // ফর্ম হাইড করে বড় সবুজ সাকসেস মেসেজ দেখানো
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('authFooterText').style.display = 'none';
+            document.getElementById('successAlert').style.display = 'block';
+
+            // ২ সেকেন্ড পর অটোমেটিক লগইন পেজে পাঠিয়ে দেওয়া
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

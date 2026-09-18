@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Jobs | SEU Career Connect</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(18, 26, 41, 0.75);
+            --neon-blue: #0066ff;
+            --neon-glow: rgba(0, 102, 255, 0.3);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Cyberpunk Star Simulation Background Canvas */
+        #spaceCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .flex-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .varsity-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--neon-blue);
+        }
+
+        .logo-text h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text h2 span {
+            color: var(--neon-blue);
+        }
+
+        .logo-text small {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 130px 0 60px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            letter-spacing: -1px;
+        }
+
+        .page-desc {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .btn-post-job {
+            background: rgba(0, 102, 255, 0.15);
+            border: 1px solid var(--neon-blue);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-post-job:hover {
+            background: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-glow);
+        }
+
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .job-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 14px;
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px var(--neon-glow);
+            transform: translateY(-3px);
+        }
+
+        .job-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .company-name {
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .job-details {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .job-desc-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-apply {
+            background: var(--neon-blue);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-apply:hover {
+            background: #0052cc;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cyberpunk Star Simulation Canvas -->
+    <canvas id="spaceCanvas"></canvas>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container flex-nav">
+            <a href="index.html" class="logo-container">
+                <img src="images/download.jpg" alt="SEU Logo" class="varsity-logo">
+                <div class="logo-text">
+                    <h2>SOUTHEAST <span>UNIVERSITY</span></h2>
+                    <small>Career Connect Portal</small>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="jobs.html" class="active">Find Jobs</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="alumni event.html">Events</a></li>
+                    <li><a href="mentorship.html">Mentorship</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Jobs Section -->
+    <div class="container main-content">
+        <div class="page-header-flex">
+            <div>
+                <h1 class="page-title">Explore Career Opportunities</h1>
+                <p class="page-desc">Hand-picked tech jobs and roles from elite partner companies for SEU students.</p>
+            </div>
+            <a href="job-post.html" class="btn-post-job"><i class="fa-solid fa-plus"></i> Post a Job</a>
+        </div>
+        
+        <div class="job-grid" id="jobGridContainer">
+            <!-- Dynamic & Default Jobs will load here -->
+        </div>
+    </div>
+
+    <!-- Star Simulation Script -->
+    <script>
+        const canvas = document.getElementById('spaceCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const stars = [];
+        const numStars = 120;
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                alpha: Math.random(),
+                speed: Math.random() * 0.2 + 0.05
+            });
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ffffff';
+
+            stars.forEach(star => {
+                ctx.globalAlpha = star.alpha;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                star.y -= star.speed;
+                if (star.y < 0) {
+                    star.y = canvas.height;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+    </script>
+
+    <!-- Jobs Loader Script with Apply redirection -->
+    <script>
+        const defaultJobs = [
+            {
+                title: "Frontend React Developer",
+                company: "TechTitan Solutions",
+                location: "Dhaka, Bangladesh",
+                salary: "BDT 45k - 60k",
+                desc: "Looking for a skilled React developer with hands-on experience in Tailwind CSS and Redux Toolkit."
+            },
+            {
+                title: "Backend Node.js Engineer",
+                company: "CyberSec Ltd.",
+                location: "Remote",
+                salary: "BDT 50k - 75k",
+                desc: "Seeking secure backend scripters proficient in Node.js, Express, and MongoDB database management."
+            },
+            {
+                title: "Full Stack Developer",
+                company: "Innovate Hub",
+                location: "Gulshan, Dhaka",
+                salary: "BDT 60k - 90k",
+                desc: "Join our rapid elite engineering team to build scalable web platforms and microservices architecture."
+            },
+            {
+                title: "Cyber Security Analyst",
+                company: "DefendX Global",
+                location: "Banani, Dhaka",
+                salary: "BDT 70k - 110k",
+                desc: "Responsible for vulnerability assessments, penetration testing, and incident response operations."
+            },
+            {
+                title: "Flutter Mobile App Developer",
+                company: "AppCraft Studio",
+                location: "Uttara, Dhaka",
+                salary: "BDT 40k - 65k",
+                desc: "Build cross-platform high-performance applications targeting Android and iOS platforms."
+            },
+            {
+                title: "UI/UX Designer",
+                company: "PixelCraft BD",
+                location: "Remote",
+                salary: "BDT 35k - 50k",
+                desc: "Create intuitive user flows, cyberpunk wireframes, and eye-catching interactive dashboard designs."
+            }
+        ];
+
+        function loadJobs() {
+            const container = document.getElementById('jobGridContainer');
+            let customJobs = JSON.parse(localStorage.getItem('seu_custom_jobs')) || [];
+            let allJobs = [...customJobs, ...defaultJobs];
+            container.innerHTML = "";
+
+            allJobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                const applyUrl = `apply.html?position=${encodeURIComponent(job.title + ' at ' + job.company)}`;
+                
+                card.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <span class="company-name"><i class="fa-solid fa-building"></i> ${job.company}</span>
+                    <div class="job-details">
+                        <span><i class="fa-solid fa-location-dot"></i> ${job.location}</span>
+                        <span><i class="fa-solid fa-wallet"></i> ${job.salary}</span>
+                    </div>
+                    <p class="job-desc-text">${job.desc}</p>
+                    <a href="${applyUrl}" class="btn-apply">Apply Now</a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.onload = loadJobs;
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

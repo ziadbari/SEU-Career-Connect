@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SEU Career Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(18, 26, 41, 0.75);
+            --neon-blue: #0066ff;
+            --neon-glow: rgba(0, 102, 255, 0.3);
+            --neon-red: #ff3333;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+        body { background-color: var(--bg-deep); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-glass); z-index: 1000; padding: 15px 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .flex-nav { display: flex; align-items: center; justify-content: space-between; }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .varsity-logo { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; border: 1px solid var(--neon-blue); }
+        .logo-text h2 { font-size: 1.1rem; font-weight: 800; color: #fff; margin: 0; }
+        .logo-text h2 span { color: var(--neon-blue); }
+        .logo-text small { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+        .nav-links { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px var(--neon-blue); }
+        
+        .auth-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; }
+        .auth-card { background: var(--bg-card); border: 1px solid var(--border-glass); backdrop-filter: blur(16px); padding: 40px; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+        .auth-card h2 { text-align: center; font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+        .form-group input { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border-glass); padding: 12px 15px; border-radius: 8px; color: #fff; font-size: 0.95rem; outline: none; box-sizing: border-box; }
+        .form-group input:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px var(--neon-glow); }
+        
+        /* Alert Message Box */
+        .alert-box {
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        .alert-error {
+            background: rgba(255, 51, 51, 0.15);
+            border: 1px solid var(--neon-red);
+            color: #ff8080;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.2);
+        }
+        .alert-success {
+            background: rgba(0, 102, 255, 0.15);
+            border: 1px solid var(--neon-blue);
+            color: #3b82f6;
+            box-shadow: 0 0 10px var(--neon-glow);
+        }
+
+        .btn-submit { width: 100%; background: var(--neon-blue); border: none; color: #fff; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #0052cc; box-shadow: 0 0 15px var(--neon-blue); }
+        .auth-footer { text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--text-muted); }
+        .auth-footer a { color: var(--neon-blue); text-decoration: none; font-weight: 600; }
+        
+        .demo-credential-box {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px dashed var(--border-glass);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container flex-nav">
+            <a href="index.html" class="logo-container">
+                <img src="images/download.jpg" alt="SEU Logo" class="varsity-logo">
+                <div class="logo-text">
+                    <h2>SOUTHEAST <span>UNIVERSITY</span></h2>
+                    <small>Career Connect Portal</small>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="jobs.html">Find Jobs</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                    <li><a href="mentorship.html">Mentorship</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="student-dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="auth-section">
+        <div class="auth-card">
+            <h2>Portal Login</h2>
+            
+            <!-- Alert Message Display -->
+            <div id="loginAlert" class="alert-box"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Student ID / Email</label>
+                    <input type="text" id="userId" placeholder="e.g. 2023001" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="userPass" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+            </form>
+
+            <div class="demo-credential-box">
+                💡 <b>Demo Access:</b> ID: <code>2023001</code> | Pass: <code>seu12345</code>
+            </div>
+
+            <div class="auth-footer">
+                Don't have an account? <a href="register.html">Register here</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const inputId = document.getElementById('userId').value.trim();
+            const inputPass = document.getElementById('userPass').value.trim();
+            const alertBox = document.getElementById('loginAlert');
+
+            
+            const correctId = "2023001";
+            const correctPass = "seu12345";
+
+            if (inputId === correctId && inputPass === correctPass) {
+                alertBox.className = "alert-box alert-success";
+                alertBox.innerHTML = "<i class='fa-solid fa-check-circle'></i> Login Successful! Redirecting to Dashboard...";
+                alertBox.style.display = "block";
+
+                
+                setTimeout(() => {
+                    window.location.href = "student-dashboard.html";
+                }, 1500);
+            } else {
+                alertBox.className = "alert-box alert-error";
+                alertBox.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Access Denied: Invalid Student ID or Password!";
+                alertBox.style.display = "block";
+            }
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

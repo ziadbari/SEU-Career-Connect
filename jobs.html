@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Jobs | SEU Career Connect</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(10, 15, 25, 0.85);
+            --neon-green: #00ff66;
+            --neon-glow: rgba(0, 255, 102, 0.3);
+            --border-glass: rgba(0, 255, 102, 0.25);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Deep Cyber Security Matrix Simulation Canvas */
+        #cyberCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .flex-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .varsity-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--neon-green);
+        }
+
+        .logo-text h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text h2 span {
+            color: var(--neon-green);
+        }
+
+        .logo-text small {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 130px 0 60px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            letter-spacing: -1px;
+            color: #fff;
+        }
+
+        .page-desc {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .btn-post-job {
+            background: rgba(0, 255, 102, 0.15);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-post-job:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .job-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 14px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .job-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 25px var(--neon-glow);
+            transform: translateY(-3px);
+        }
+
+        .job-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .company-name {
+            color: var(--neon-green);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .job-details {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .job-desc-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-apply {
+            background: rgba(0, 255, 102, 0.15);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-apply:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cyber Security Matrix Simulation Canvas -->
+    <canvas id="cyberCanvas"></canvas>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container flex-nav">
+            <a href="index.html" class="logo-container">
+                <img src="images/download.jpg" alt="SEU Logo" class="varsity-logo">
+                <div class="logo-text">
+                    <h2>SOUTHEAST <span>UNIVERSITY</span></h2>
+                    <small>Career Connect Portal</small>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="jobs.html" class="active">Find Jobs</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="alumni event.html">Events</a></li>
+                    <li><a href="mentorship.html">Mentorship</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Jobs Section -->
+    <div class="container main-content">
+        <div class="page-header-flex">
+            <div>
+                <h1 class="page-title">Explore Career Opportunities</h1>
+                <p class="page-desc">Hand-picked tech jobs and roles from elite partner companies for SEU students.</p>
+            </div>
+            <a href="job-post.html" class="btn-post-job"><i class="fa-solid fa-plus"></i> Post a Job</a>
+        </div>
+        
+        <div class="job-grid" id="jobGridContainer">
+            <!-- Dynamic & Default Jobs will load here -->
+        </div>
+    </div>
+
+    <!-- Cyber Security Matrix Rain Simulation Script -->
+    <script>
+        const canvas = document.getElementById('cyberCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const characters = '01ABCDEF010101XYZ#$@<>*&[]';
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+    </script>
+
+    <!-- Jobs Loader Script with Apply redirection -->
+    <script>
+        const defaultJobs = [
+            {
+                title: "Frontend React Developer",
+                company: "TechTitan Solutions",
+                location: "Dhaka, Bangladesh",
+                salary: "BDT 45k - 60k",
+                desc: "Looking for a skilled React developer with hands-on experience in Tailwind CSS and Redux Toolkit."
+            },
+            {
+                title: "Backend Node.js Engineer",
+                company: "CyberSec Ltd.",
+                location: "Remote",
+                salary: "BDT 50k - 75k",
+                desc: "Seeking secure backend scripters proficient in Node.js, Express, and MongoDB database management."
+            },
+            {
+                title: "Full Stack Developer",
+                company: "Innovate Hub",
+                location: "Gulshan, Dhaka",
+                salary: "BDT 60k - 90k",
+                desc: "Join our rapid elite engineering team to build scalable web platforms and microservices architecture."
+            },
+            {
+                title: "Cyber Security Analyst",
+                company: "DefendX Global",
+                location: "Banani, Dhaka",
+                salary: "BDT 70k - 110k",
+                desc: "Responsible for vulnerability assessments, penetration testing, and incident response operations."
+            },
+            {
+                title: "Flutter Mobile App Developer",
+                company: "AppCraft Studio",
+                location: "Uttara, Dhaka",
+                salary: "BDT 40k - 65k",
+                desc: "Build cross-platform high-performance applications targeting Android and iOS platforms."
+            },
+            {
+                title: "UI/UX Designer",
+                company: "PixelCraft BD",
+                location: "Remote",
+                salary: "BDT 35k - 50k",
+                desc: "Create intuitive user flows, cyberpunk wireframes, and eye-catching interactive dashboard designs."
+            },
+            {
+                title: "DevOps Cloud Engineer",
+                company: "CloudCore Tech",
+                location: "Mohakhali, Dhaka",
+                salary: "BDT 80k - 120k",
+                desc: "Manage AWS infrastructure, Docker containers, CI/CD pipelines, and automated server monitoring."
+            },
+            {
+                title: "AI / Machine Learning Engineer",
+                company: "NeuralNet Bangladesh",
+                location: "Agargaon, Dhaka",
+                salary: "BDT 75k - 110k",
+                desc: "Develop and deploy deep learning models, natural language processing tools, and data analytics engines."
+            },
+            {
+                title: "Software Quality Assurance (SQA) Engineer",
+                company: "BugSlayer Corp",
+                location: "Dhanmondi, Dhaka",
+                salary: "BDT 40k - 60k",
+                desc: "Perform rigorous manual and automated test cases, bug tracking, and performance stress testing."
+            }
+        ];
+
+        function loadJobs() {
+            const container = document.getElementById('jobGridContainer');
+            let customJobs = JSON.parse(localStorage.getItem('seu_custom_jobs')) || [];
+            let allJobs = [...customJobs, ...defaultJobs];
+            container.innerHTML = "";
+
+            allJobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                const applyUrl = `apply.html?position=${encodeURIComponent(job.title + ' at ' + job.company)}`;
+                
+                card.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <span class="company-name"><i class="fa-solid fa-building"></i> ${job.company}</span>
+                    <div class="job-details">
+                        <span><i class="fa-solid fa-location-dot"></i> ${job.location}</span>
+                        <span><i class="fa-solid fa-wallet"></i> ${job.salary}</span>
+                    </div>
+                    <p class="job-desc-text">${job.desc}</p>
+                    <a href="${applyUrl}" class="btn-apply">Apply Now</a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.onload = loadJobs;
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

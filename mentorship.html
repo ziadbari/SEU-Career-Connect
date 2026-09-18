@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SEU Career Connect - Mentorship</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            /* MAIN BACKGROUND */
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.20), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.18), transparent 35%),
+                linear-gradient(135deg, #eef4ff, #e8f5f1);
+
+            color: #172033;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            width: 100%;
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.80);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1769aa;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #25324a;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #1769aa;
+        }
+
+        .login-btn {
+            background: #1769aa;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 80px 7% 50px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 18px;
+            color: #132238;
+        }
+
+        .hero h1 span {
+            color: #1769aa;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #526176;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+        }
+
+        .primary-btn {
+            border: none;
+            background: #1769aa;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 9px;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .primary-btn:hover {
+            background: #0f4f82;
+        }
+
+        .secondary-btn {
+            border: 1px solid #1769aa;
+            background: rgba(255,255,255,0.6);
+            color: #1769aa;
+            padding: 13px 25px;
+            border-radius: 9px;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px 7% 50px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(10px);
+
+            padding: 25px;
+            border-radius: 14px;
+            text-align: center;
+
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 10px 30px rgba(30, 60, 100, 0.08);
+        }
+
+        .stat-card h2 {
+            color: #1769aa;
+            font-size: 30px;
+        }
+
+        .stat-card p {
+            margin-top: 8px;
+            color: #64748b;
+        }
+
+        /* SECTION */
+
+        .section {
+            padding: 40px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        /* SEARCH */
+
+        .search-area {
+            display: flex;
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto 35px;
+        }
+
+        .search-area input,
+        .search-area select {
+            padding: 14px;
+            border-radius: 9px;
+            border: 1px solid #ccd6e3;
+            outline: none;
+            background: rgba(255,255,255,0.85);
+        }
+
+        .search-area input {
+            flex: 1;
+        }
+
+        /* MENTOR GRID */
+
+        .mentor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .mentor-card {
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(12px);
+
+            border-radius: 16px;
+            padding: 25px;
+
+            border: 1px solid rgba(255,255,255,0.9);
+
+            box-shadow: 0 12px 35px rgba(30, 60, 100, 0.10);
+
+            transition: 0.3s;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(30, 60, 100, 0.16);
+        }
+
+        .mentor-avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #dbeafe;
+            color: #1769aa;
+
+            font-size: 22px;
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .mentor-card h3 {
+            margin-bottom: 6px;
+        }
+
+        .designation {
+            color: #1769aa;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .company {
+            color: #64748b;
+            margin: 6px 0;
+        }
+
+        .experience {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .skills {
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .skill {
+            background: #e8f1ff;
+            color: #1769aa;
+            padding: 6px 9px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .rating {
+            color: #d97706;
+            margin-bottom: 15px;
+        }
+
+        .book-btn {
+            width: 100%;
+            border: none;
+            background: #1769aa;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .book-btn:hover {
+            background: #0f4f82;
+        }
+
+        /* SESSION */
+
+        .session-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .session-card {
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(10px);
+
+            padding: 25px;
+            border-radius: 15px;
+
+            box-shadow: 0 10px 30px rgba(30,60,100,0.10);
+        }
+
+        .live {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .upcoming {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .session-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .session-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .session-btn {
+            border: none;
+            background: #1769aa;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        /* HOST */
+
+        .host-section {
+            margin: 50px 7%;
+            padding: 45px;
+
+            border-radius: 18px;
+
+            background: linear-gradient(
+                135deg,
+                #1769aa,
+                #087f5b
+            );
+
+            color: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .host-section p {
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        .host-btn {
+            background: white;
+            color: #1769aa;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0,0,0,0.55);
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 999;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 500px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+
+            border: 1px solid #ccd6e3;
+            border-radius: 7px;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 22px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+            padding: 30px 7%;
+
+            background: rgba(255,255,255,0.75);
+
+            text-align: center;
+            color: #64748b;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 900px) {
+
+            .mentor-grid,
+            .session-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .mentor-grid,
+            .session-grid,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .search-area {
+                flex-direction: column;
+            }
+
+            .host-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        SEU Career Connect
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="internships.html">Internships</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="login.html" class="login-btn">Login</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h1>
+        Learn From <span>SEU Alumni</span>
+    </h1>
+
+    <p>
+        Connect with experienced alumni, book one-to-one mentorship
+        sessions, join group sessions and attend live classes to
+        build your career.
+    </p>
+
+    <div class="hero-buttons">
+
+        <button class="primary-btn"
+                onclick="document.getElementById('mentors').scrollIntoView()">
+            Find a Mentor
+        </button>
+
+        <button class="secondary-btn"
+                onclick="document.getElementById('sessions').scrollIntoView()">
+            Explore Sessions
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat-card">
+        <h2>120+</h2>
+        <p>Alumni Mentors</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>350+</h2>
+        <p>Students Connected</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>80+</h2>
+        <p>Live Sessions</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>4.9/5</h2>
+        <p>Average Rating</p>
+    </div>
+
+</section>
+
+
+<!-- MENTORS -->
+
+<section class="section" id="mentors">
+
+    <div class="section-title">
+
+        <h2>Find Your Mentor</h2>
+
+        <p>
+            Search and connect with experienced SEU alumni.
+        </p>
+
+    </div>
+
+
+    <div class="search-area">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search mentor, company or skill..."
+            onkeyup="searchMentors()"
+        >
+
+        <select id="categoryFilter"
+                onchange="searchMentors()">
+
+            <option value="all">All Industries</option>
+            <option value="software">Software</option>
+            <option value="data">Data & AI</option>
+            <option value="design">Design</option>
+            <option value="business">Business</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="mentor-grid" id="mentorGrid">
+
+
+        <!-- MENTOR 1 -->
+
+        <div class="mentor-card"
+             data-category="software"
+             data-search="ahmed rahman google java spring boot system design">
+
+            <div class="mentor-avatar">
+                AR
+            </div>
+
+            <h3>Ahmed Rahman</h3>
+
+            <div class="designation">
+                Senior Software Engineer
+            </div>
+
+            <div class="company">
+                Google
+            </div>
+
+            <div class="experience">
+                7+ Years Experience
+            </div>
+
+            <div class="skills">
+                <span class="skill">Java</span>
+                <span class="skill">Spring Boot</span>
+                <span class="skill">System Design</span>
+            </div>
+
+            <div class="rating">
+                ★ 4.9
+            </div>
+
+            <button class="book-btn"
+                    onclick="openBooking('Ahmed Rahman')">
+                Book Session
+            </button>
+
+        </div>
+
+
+        <!-- MENTOR 2 -->
+
+        <div class="mentor-card"
+             data-category="data"
+             data-search="farhana sultana microsoft python ml sql">
+
+            <div class="mentor-avatar">
+                FS
+            </div>
+
+            <h3>Farhana Sultana</h3>
+
+            <div class="designation">
+                Data Scientist
+            </div>
+
+            <div class="company">
+                Microsoft
+            </div>
+
+            <div class="experience">
+                6+ Years Experience
+            </div>
+
+            <div class="skills">
+                <span class="skill">Python</span>
+                <span class="skill">Machine Learning</span>
+                <span class="skill">SQL</span>
+            </div>
+
+            <div class="rating">
+                ★ 4.8
+            </div>
+
+            <button class="book-btn"
+                    onclick="openBooking('Farhana Sultana')">
+                Book Session
+            </button>
+
+        </div>
+
+
+        <!-- MENTOR 3 -->
+
+        <div class="mentor-card"
+             data-category="software"
+             data-search="nahid hasan amazon node aws docker">
+
+            <div class="mentor-avatar">
+                NH
+            </div>
+
+            <h3>Nahid Hasan</h3>
+
+            <div class="designation">
+                Backend Engineer
+            </div>
+
+            <div class="company">
+                Amazon
+            </div>
+
+            <div class="experience">
+                5+ Years Experience
+            </div>
+
+            <div class="skills">
+                <span class="skill">Node.js</span>
+                <span class="skill">AWS</span>
+                <span class="skill">Docker</span>
+            </div>
+
+            <div class="rating">
+                ★ 4.9
+            </div>
+
+            <button class="book-btn"
+                    onclick="openBooking('Nahid Hasan')">
+                Book Session
+            </button>
+
+        </div>
+
+
+        <!-- MENTOR 4 -->
+
+        <div class="mentor-card"
+             data-category="design"
+             data-search="sarah ahmed pathao figma ux product design">
+
+            <div class="mentor-avatar">
+                SA
+            </div>
+
+            <h3>Sarah Ahmed</h3>
+
+            <div class="designation">
+                Product Designer
+            </div>
+
+            <div class="company">
+                Pathao
+            </div>
+
+            <div class="experience">
+                5+ Years Experience
+            </div>
+
+            <div class="skills">
+                <span class="skill">Figma</span>
+                <span class="skill">UX Research</span>
+                <span class="skill">Product Design</span>
+            </div>
+
+            <div class="rating">
+                ★ 4.7
+            </div>
+
+            <button class="book-btn"
+                    onclick="openBooking('Sarah Ahmed')">
+                Book Session
+            </button>
+
+        </div>
+
+
+        <!-- MENTOR 5 -->
+
+        <div class="mentor-card"
+             data-category="business"
+             data-search="tanvir mahmud bkash business strategy fintech">
+
+            <div class="mentor-avatar">
+                TM
+            </div>
+
+            <h3>Tanvir Mahmud</h3>
+
+            <div class="designation">
+                Business Analyst
+            </div>
+
+            <div class="company">
+                bKash
+            </div>
+
+            <div class="experience">
+                8+ Years Experience
+            </div>
+
+            <div class="skills">
+                <span class="skill">Business Analysis</span>
+                <span class="skill">Strategy</span>
+                <span class="skill">FinTech</span>
+            </div>
+
+            <div class="rating">
+                ★ 4.9
+            </div>
+
+            <button class="book-btn"
+                    onclick="openBooking('Tanvir Mahmud')">
+                Book Session
+            </button>
+
+        </div>
+
+
+        <!-- MENTOR 6 -->
+
+        <div class="mentor-card"
+             data-category="software"
+             data-search="mahin rahman grameenphone react javascript mongodb">
+
+            <div class="mentor-avatar">
+                MR
+            </div>
+
+            <h3>Mahin Rahman</h3>
+
+            <div class="designation">
+                Full Stack Developer
+            </div>
+
+            <div class="company">
+                Grameenphone
+            </div>
+
+            <div class="experience">
+                6+ Years Experience
+            </div>
+
+            <div class="skills">
+                <span class="skill">React</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">MongoDB</span>
+            </div>
+
+            <div class="rating">
+                ★ 4.8
+            </div>
+
+            <button class="book-btn"
+                    onclick="openBooking('Mahin Rahman')">
+                Book Session
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SESSIONS -->
+
+<section class="section" id="sessions">
+
+    <div class="section-title">
+
+        <h2>Live & Upcoming Sessions</h2>
+
+        <p>
+            Join live classes and group mentorship sessions.
+        </p>
+
+    </div>
+
+
+    <div class="session-grid">
+
+
+        <div class="session-card">
+
+            <span class="live">
+                ● LIVE NOW
+            </span>
+
+            <h3>
+                Java Backend Development
+            </h3>
+
+            <p>
+                Learn Spring Boot, REST API and backend
+                development from an experienced engineer.
+            </p>
+
+            <button class="session-btn"
+                    onclick="joinLive()">
+                Join Live
+            </button>
+
+        </div>
+
+
+        <div class="session-card">
+
+            <span class="upcoming">
+                UPCOMING
+            </span>
+
+            <h3>
+                How to Prepare for Big Tech
+            </h3>
+
+            <p>
+                Resume preparation, coding interviews and
+                system design guidance.
+            </p>
+
+            <button class="session-btn"
+                    onclick="reserveSeat()">
+                Reserve Seat
+            </button>
+
+        </div>
+
+
+        <div class="session-card">
+
+            <span class="upcoming">
+                UPCOMING
+            </span>
+
+            <h3>
+                Introduction to Machine Learning
+            </h3>
+
+            <p>
+                Understand the basics of machine learning,
+                Python and real-world projects.
+            </p>
+
+            <button class="session-btn"
+                    onclick="reserveSeat()">
+                Reserve Seat
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOST SESSION -->
+
+<section class="host-section">
+
+    <div>
+
+        <h2>
+            Are you an SEU Alumni?
+        </h2>
+
+        <p>
+            Share your experience and help the next generation
+            of SEU students.
+        </p>
+
+    </div>
+
+    <button class="host-btn"
+            onclick="openHostModal()">
+        Host a Session
+    </button>
+
+</section>
+
+
+<!-- BOOKING MODAL -->
+
+<div class="modal" id="bookingModal">
+
+    <div class="modal-content">
+
+        <span class="close-btn"
+              onclick="closeBooking()">
+            ×
+        </span>
+
+        <h2>
+            Book Mentorship Session
+        </h2>
+
+        <p id="mentorName"
+           style="margin-bottom:15px;">
+        </p>
+
+        <input type="date" id="bookingDate">
+
+        <input type="time" id="bookingTime">
+
+        <select id="sessionType">
+
+            <option value="one-to-one">
+                One-to-One Session
+            </option>
+
+            <option value="group">
+                Group Session
+            </option>
+
+        </select>
+
+        <textarea
+            id="message"
+            rows="4"
+            placeholder="Write a message to your mentor...">
+        </textarea>
+
+        <button class="primary-btn"
+                onclick="confirmBooking()">
+
+            Confirm Booking
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HOST MODAL -->
+
+<div class="modal" id="hostModal">
+
+    <div class="modal-content">
+
+        <span class="close-btn"
+              onclick="closeHostModal()">
+            ×
+        </span>
+
+        <h2>
+            Host a Mentorship Session
+        </h2>
+
+        <input
+            type="text"
+            id="sessionTitle"
+            placeholder="Session title"
+        >
+
+        <textarea
+            id="sessionDescription"
+            rows="4"
+            placeholder="Session description">
+        </textarea>
+
+        <input
+            type="date"
+            id="sessionDate"
+        >
+
+        <input
+            type="time"
+            id="sessionTime"
+        >
+
+        <select id="hostSessionType">
+
+            <option value="live">
+                Live Class
+            </option>
+
+            <option value="group">
+                Group Mentorship
+            </option>
+
+            <option value="one-to-one">
+                One-to-One
+            </option>
+
+        </select>
+
+        <button class="primary-btn"
+                onclick="createSession()">
+
+            Create Session
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 SEU Career Connect | Southeast University
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* SEARCH MENTORS */
+
+    function searchMentors() {
+
+        const input =
+            document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+        const category =
+            document
+            .getElementById("categoryFilter")
+            .value;
+
+        const cards =
+            document.querySelectorAll(".mentor-card");
+
+        cards.forEach(card => {
+
+            const text =
+                card.dataset.search;
+
+            const cardCategory =
+                card.dataset.category;
+
+            const searchMatch =
+                text.includes(input);
+
+            const categoryMatch =
+                category === "all" ||
+                cardCategory === category;
+
+            if (searchMatch && categoryMatch) {
+
+                card.style.display = "block";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    /* BOOKING */
+
+    function openBooking(name) {
+
+        document
+        .getElementById("bookingModal")
+        .style.display = "flex";
+
+        document
+        .getElementById("mentorName")
+        .innerText =
+            "Mentor: " + name;
+
+    }
+
+
+    function closeBooking() {
+
+        document
+        .getElementById("bookingModal")
+        .style.display = "none";
+
+    }
+
+
+    function confirmBooking() {
+
+        const date =
+            document
+            .getElementById("bookingDate")
+            .value;
+
+        const time =
+            document
+            .getElementById("bookingTime")
+            .value;
+
+        if (!date || !time) {
+
+            alert("Please select date and time.");
+
+            return;
+        }
+
+        alert(
+            "Booking request submitted successfully!"
+        );
+
+        closeBooking();
+
+    }
+
+
+    /* LIVE SESSION */
+
+    function joinLive() {
+
+        alert(
+            "You are joining the live mentorship session."
+        );
+
+    }
+
+
+    function reserveSeat() {
+
+        alert(
+            "Your seat has been reserved successfully!"
+        );
+
+    }
+
+
+    /* HOST SESSION */
+
+    function openHostModal() {
+
+        document
+        .getElementById("hostModal")
+        .style.display = "flex";
+
+    }
+
+
+    function closeHostModal() {
+
+        document
+        .getElementById("hostModal")
+        .style.display = "none";
+
+    }
+
+
+    function createSession() {
+
+        const title =
+            document
+            .getElementById("sessionTitle")
+            .value;
+
+        if (!title) {
+
+            alert("Please enter session title.");
+
+            return;
+        }
+
+        alert(
+            "Session created successfully!"
+        );
+
+        closeHostModal();
+
+    }
+
+
+    /* CLOSE MODAL WHEN CLICK OUTSIDE */
+
+    window.onclick = function(event) {
+
+        const bookingModal =
+            document.getElementById("bookingModal");
+
+        const hostModal =
+            document.getElementById("hostModal");
+
+        if (event.target === bookingModal) {
+
+            closeBooking();
+
+        }
+
+        if (event.target === hostModal) {
+
+            closeHostModal();
+
+        }
+
+    };
+
+</script>
+
+</body>
+</html>
